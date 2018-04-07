@@ -113,17 +113,16 @@ public class Stresser {
                         String loginCmd= "/" + loginCommand + " " + password;
                         event.getSession().send(new ClientChatPacket(registerCmd));
                         event.getSession().send(new ClientChatPacket(loginCmd));
-                        event.getSession().send(new ClientChatPacket("Testing server performance by Minecraft Server Stress Tool (github.com)"));
+                        event.getSession().send(new ClientChatPacket("Testing server performance by Minecraft Server Stress Tool (https://github.com/kubastick/minecraft_server_stress_tool)"));
                     }
-                    event.getSession().send(new ClientChatPacket("Testing server performance by Minecraft Server Stress Tool by Jakub Tomana"));
                     Messanger.println("Connected and sended messanges!",Color.GREEN);
                     Messanger.setColor(Color.WHITE);
                 } else if(event.getPacket() instanceof ServerChatPacket) {
                     Message message = event.<ServerChatPacket>getPacket().getMessage();
                     Messanger.println("Received Message: " + message.getText());
-                    if(message instanceof TranslationMessage) {
+                    //if(message instanceof TranslationMessage) {
                        // System.out.println("Received Translation Components: " + Arrays.toString(((TranslationMessage) message).getTranslationParams()));
-                    }
+                    //}
                     //event.getSession().disconnect("Finished");
                 }
             }
