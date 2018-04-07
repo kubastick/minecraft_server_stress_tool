@@ -5,7 +5,7 @@ import org.apache.commons.cli.*;
 public class Loader {
     public static void main(String[] args)
     {
-        //Stresser st = new Stresser("yknomeh.eu",7080,4,"bottest",5000);
+        //Stresser st = new Stresser("survivalcore.eu",25565,20,"bottest",5000);
         Options options = new Options();
 
         Option serverAdress = new Option("a", "ip", true, "server adress");

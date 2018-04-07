@@ -7,7 +7,7 @@ class Color{
 /** Class used to easly port this tool output to other platforms */
 public class Messanger {
 
-    private final static boolean ENABLE_COLOR = true;
+    private final static boolean ENABLE_COLOR = false;
     protected static void println(String msg)
     {
         System.out.println(msg);
