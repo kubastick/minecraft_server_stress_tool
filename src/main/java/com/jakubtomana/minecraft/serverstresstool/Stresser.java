@@ -104,7 +104,7 @@ public class Stresser {
 
     private void joinserver()
     {
-        MinecraftProtocol protocol = new MinecraftProtocol(nick+rn.nextInt(30));
+        MinecraftProtocol protocol = new MinecraftProtocol(nick+rn.nextInt(10000));
         Client client = new Client(serverAdress,port, protocol, new TcpSessionFactory(Proxy.NO_PROXY));
         client.getSession().setFlag(MinecraftConstants.AUTH_PROXY_KEY,Proxy.NO_PROXY);
         client.getSession().addListener(new SessionAdapter() {

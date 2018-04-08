@@ -24,6 +24,7 @@ jar{
         attributes 'Main-Class' : 'com.jakubtomana.minecraft.serverstresstool.Loader'
     }
 }
+
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Gradle Jar File Example',
@@ -33,4 +34,10 @@ task fatJar(type: Jar) {
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+}
+
+run{
+    if (project.hasProperty("appArgs")) {
+        args Eval.me(appArgs)
+    }
 }
