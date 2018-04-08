@@ -77,7 +77,6 @@ public class Stresser {
                 totalSlots=info.getPlayerInfo().getMaxPlayers();
                 Messanger.println("Players: " + Arrays.toString(info.getPlayerInfo().getPlayers()));
                 Messanger.println("Description: " + info.getDescription().getFullText());
-                Messanger.println("Icon: " + info.getIcon());
             }
         });
         client.getSession().connect();
@@ -87,7 +86,13 @@ public class Stresser {
     {
         for(int x=0;x<threadsNum;x++)
         {
-            Thread t = new Thread(this::joinserver);
+            Messanger.println("Started new thread:"+x);
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    joinserver();
+                }
+            });
             t.start();
             try {
                 Thread.sleep(delay);
@@ -112,7 +117,9 @@ public class Stresser {
                         String registerCmd = "/" + registerCommand + " "+ password + " " + password;
                         String loginCmd= "/" + loginCommand + " " + password;
                         event.getSession().send(new ClientChatPacket(registerCmd));
+                        Messanger.println("Executed command:"+registerCmd,Color.GREEN);
                         event.getSession().send(new ClientChatPacket(loginCmd));
+                        Messanger.println("Executed command:"+loginCmd,Color.GREEN);
                         event.getSession().send(new ClientChatPacket("Testing server performance by Minecraft Server Stress Tool (https://github.com/kubastick/minecraft_server_stress_tool)"));
                     }
                     Messanger.println("Connected and sended messanges!",Color.GREEN);
@@ -129,7 +136,7 @@ public class Stresser {
 
             @Override
             public void disconnected(DisconnectedEvent event) {
-                System.out.println("Disconnected: " + Message.fromString(event.getReason()).getFullText());
+                Messanger.println("Disconnected: " + Message.fromString(event.getReason()).getFullText(),Color.RED);
                 if(event.getCause() != null) {
                     event.getCause().printStackTrace();
                 }

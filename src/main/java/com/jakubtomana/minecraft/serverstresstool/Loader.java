@@ -24,11 +24,11 @@ public class Loader {
         basenick.setRequired(true);
         options.addOption(basenick);
 
-        Option logincommand = new Option("l", "logincmd", true, "login command withcout slash");
+        Option logincommand = new Option("l", "logincmd", true, "login command without slash");
         logincommand.setRequired(true);
         options.addOption(logincommand);
 
-        Option registercommand = new Option("r", "registercmd", true, "register command witchout slash");
+        Option registercommand = new Option("r", "registercmd", true, "register command without slash");
         registercommand.setRequired(true);
         options.addOption(registercommand);
 
