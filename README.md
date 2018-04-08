@@ -13,5 +13,6 @@
 ## Download:
 https://github.com/kubastick/minecraft_server_stress_tool/releases
 ## Notes:
-I am irresponsible for the unauthorized use of this tool
+I am irresponsible for the unauthorized use of this tool  
+Used https://github.com/Steveice10/MCProtocolLib by Steveice10
 
