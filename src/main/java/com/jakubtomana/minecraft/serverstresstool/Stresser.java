@@ -34,21 +34,24 @@ public class Stresser {
     private final String registerCommand;
     private final String loginCommand;
     private final int delay;
+    private final String preCmd;
+    private final String postCmd;
     //variables
     private int totalSlots;
     private int freeSlots;
     private Random rn = new Random();
     /** Creates new stresser object (with register and login)*/
-    public Stresser(String serverAdress,int port,int threadsNum,String nick,String loginCommand,String registerCommand,int delay)
-    {
-        this.serverAdress=serverAdress;
-        this.port=port;
-        this.nick=nick;
-        this.threadsNum=threadsNum;
-        this.loginCommand=loginCommand;
-        this.registerCommand=registerCommand;
-        this.delay=delay;
-        needRegister=true;
+    public Stresser(String serverAdress,int port,int threadsNum,String nick,String loginCommand,String registerCommand,int delay,String preCmd,String postCmd) {
+        this.serverAdress = serverAdress;
+        this.port = port;
+        this.nick = nick;
+        this.threadsNum = threadsNum;
+        this.loginCommand = loginCommand;
+        this.registerCommand = registerCommand;
+        this.delay = delay;
+        this.preCmd = preCmd;
+        this.postCmd = postCmd;
+        needRegister = true;
     }
     /** Creates new stresser object (without register and login)*/
     public Stresser(String serverAdress,int port,int threadsNum,String nick,int delay)
@@ -60,6 +63,8 @@ public class Stresser {
         this.loginCommand="";
         this.registerCommand="";
         this.delay=delay;
+        this.preCmd="";
+        this.postCmd="";
         needRegister=false;
     }
     /** Prints server info to messanger class*/
@@ -113,6 +118,11 @@ public class Stresser {
                 if(event.getPacket() instanceof ServerJoinGamePacket) {
                     if(needRegister)
                     {
+                        if(!preCmd.isEmpty())
+                        {
+                            event.getSession().send(new ClientChatPacket("/"+preCmd));
+                            Messanger.println("Executed command:"+"/"+preCmd,Color.GREEN);
+                        }
                         int password = rn.nextInt();
                         String registerCmd = "/" + registerCommand + " "+ password + " " + password;
                         String loginCmd= "/" + loginCommand + " " + password;
@@ -120,6 +130,11 @@ public class Stresser {
                         Messanger.println("Executed command:"+registerCmd,Color.GREEN);
                         event.getSession().send(new ClientChatPacket(loginCmd));
                         Messanger.println("Executed command:"+loginCmd,Color.GREEN);
+                        if(!postCmd.isEmpty())
+                        {
+                            event.getSession().send(new ClientChatPacket("/"+postCmd));
+                            Messanger.println("Executed command:"+"/"+postCmd,Color.GREEN);
+                        }
                         event.getSession().send(new ClientChatPacket("Testing server performance by Minecraft Server Stress Tool (https://github.com/kubastick/minecraft_server_stress_tool)"));
                     }
                     Messanger.println("Connected and sended messanges!",Color.GREEN);

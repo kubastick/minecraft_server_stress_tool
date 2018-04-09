@@ -56,7 +56,7 @@ public class Loader {
                 cmd.getOptionValue("nick"),
                 cmd.getOptionValue("logincmd"),
                 cmd.getOptionValue("registercmd"),
-                delayT);
+                delayT,"","");
         //st.getServerInfo();
         st.startStressTest();
     }
